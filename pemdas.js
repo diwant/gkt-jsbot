@@ -1,6 +1,6 @@
 
 function solveThis(numsString) {
-  solveStr(reformat(numsString));
+  return solveStr(reformat(numsString));
 }
 
 function replaceAll(haystack, needle, replace) {
