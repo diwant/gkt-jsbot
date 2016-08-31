@@ -1,7 +1,7 @@
 
-var numsArray = "36 + 42 * (53 + 56) / 8";
-
-console.log(solveStr(reformat(numsArray)));
+function solveThis(numsString) {
+  solveStr(reformat(numsString));
+}
 
 function replaceAll(haystack, needle, replace) {
     return haystack.split(needle).join(replace);
@@ -72,17 +72,17 @@ function solveStr(eq) {
                 layer++;
             }
             last++; // increment the character we're looking at
-            if (last > eq.length) break firstNest; 
+            if (last > eq.length) break firstNest;
         }
-        
+
         var nested = eq.substr(first + 1, last - first - 1); // get the expression between the parentheses
-        
+
         if (last + 1 <= eq.length) { // if there is exponentiation, change to a different symbol
             if (eq[last + 1] == "^") {
                 eq = eq.substr(0, last + 1) + "&" + eq.substr((last+1)+1);
             }
         }
-        
+
         var solvedStr = solveStr(nested);
         var preStr = "(" + nested + ")";
         eq = eq.replace(preStr, solvedStr); // replace parenthetical with value

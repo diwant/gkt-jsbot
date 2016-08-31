@@ -1,6 +1,4 @@
-var myMathBot = function() {
 
-   console.debug('hhhhhhummmmm');
-};
+var numsArray = "36 + 42 * (53 + 56) / 8";
 
-alert('om');
+console.log(solveStr(reformat(numsArray)));
