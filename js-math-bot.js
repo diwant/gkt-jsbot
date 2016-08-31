@@ -1,1 +1,4 @@
-console.alert('hi');
+var myMathBot = function() {
+
+   console.debug('hhhhhhummmmm');
+};
