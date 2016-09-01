@@ -135,11 +135,14 @@ $(document).ready(function() {
         if ( !$('.square-matrix b').first().text() ) {
           answerField.val($('.square-matrix b').length);
         } else {
+
             var sum = 0;
             var bs = $('.square-matrix b');
+
             for (i=0;i<bs.length;i++)  {
-                sum += parseInt(bs[i].text());
+                sum += parseInt($(bs[i]).text());
             }
+            console.log('is sum one', bs.length, sum);
             answerField.val(sum);
         }
     } else {
