@@ -106,15 +106,39 @@ function solveStr(eq) {
 } // main recursive fx + PEMDAS
 
 
+/////////////
+// URL parameter
+/////////////////
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
 /////////////////
 // BOt Code
 //////////////
 $(document).ready(function() {
   var expr = $.trim($('.bot-question').text().substring(7).split("?")[0]);
-  console.log("Expression", expr);
-  expr = expr.replace('X', '*').replace('x', '*');
-  var answer = solveThis(expr);
-  console.log("Answer is", answer);
-  $('input[name^="bot_answer"]').val(answer);
-  $('input[type="submit"]').click();
+  var answerField = $('input[name^="bot_answer"]')
+  if(expr) {
+    expr = expr.replace('X', '*').replace('x', '*');
+    console.log("Expression", expr);
+    var answer = solveThis(expr);
+    console.log("Answer is", answer);
+    answerField.val(answer);
+  }
+
+  if( $('.square-matrix').length > 0) {
+      console.log('square-matrix');
+      answerField.val($('.square-matrix b').length);
+  }
 });
