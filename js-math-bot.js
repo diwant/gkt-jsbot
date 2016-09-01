@@ -127,18 +127,27 @@ var getUrlParameter = function getUrlParameter(sParam) {
 // BOt Code
 //////////////
 $(document).ready(function() {
-  var expr = $.trim($('.bot-question').text().substring(7).split("?")[0]);
   var answerField = $('input[name^="bot_answer"]')
-  if(expr) {
-    expr = expr.replace('X', '*').replace('x', '*');
-    console.log("Expression", expr);
-    var answer = solveThis(expr);
-    console.log("Answer is", answer);
-    answerField.val(answer);
-  }
 
-  if( $('.square-matrix').length > 0) {
-      console.log('square-matrix');
-      answerField.val($('.square-matrix b').length);
-  }
+    if( $('.square-matrix').length > 0)  {
+        console.log('square-matrix', $('.square-matrix b').first().text());
+
+        if ( !$('.square-matrix b').first().text() ) {
+          answerField.val($('.square-matrix b').length);
+        } else {
+            var sum = 0;
+            var bs = $('.square-matrix b');
+            for (i=0;i<bs.length;i++)  {
+                sum += parseInt(bs[i].text());
+            }
+            answerField.val(sum);
+        }
+    } else {
+        var expr = $.trim($('.bot-question').text().substring(7).split("?")[0]);
+        expr = expr.replace('X', '*').replace('x', '*');
+        console.log("Expression", expr);
+        var answer = solveThis(expr);
+        console.log("Answer is", answer);
+        answerField.val(answer);
+    }
 });
